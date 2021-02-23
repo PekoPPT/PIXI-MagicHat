@@ -38,7 +38,7 @@ export default class MagicHat extends Container {
       this.addChild(mask);
 
       // Initialization of the Text field that will show the emojies
-      this._item = new Text('aaa', { fontFamily: 'Arial', fontSize: 180, fill: 0xff1010, align: 'center' });
+      this._item = new Text(this._getRandomEmoji(), { fontFamily: 'Arial', fontSize: 180, fill: 0xff1010, align: 'center' });
       this._item.x = -125;
       this._item.y = -300;
       this._item.mask = mask;
@@ -53,6 +53,8 @@ export default class MagicHat extends Container {
    */
   clicked() {
     // Resets the position of the Text item
+    this._item.text = this._getRandomEmoji();
+
     gsap.to(this._item, {
       y: 0, duration: 0.001
     });
@@ -60,13 +62,20 @@ export default class MagicHat extends Container {
     // Resets the scales the hat on X
     gsap.to(this._body, { pixi: { scaleY: 0.8, transformOrigin: 'top center' }, duration: 0.1, repeat: 1, yoyo: true });
 
-    // Conversts decimal number to Emoji
-    this._item.text = String.fromCodePoint(this.getRandomInt(127789, 128567));
-
     // Animates the pop of the emoji from the hat
     gsap.to(this._item, {
       y: -600, ease: Elastic.easeOut.config(0.5, 0.3), duration: 1.5
     });
+  }
+
+  /**
+   * Generates random emoji based on passed decimal code
+   *
+   * @return {*} 
+   * @memberof MagicHat
+   */
+  _getRandomEmoji() {
+    return String.fromCodePoint(this._getRandomInt(127789, 128567));
   }
 
   /**
@@ -77,7 +86,7 @@ export default class MagicHat extends Container {
    * @return {Number} 
    * @memberof MagicHat
    */
-  getRandomInt(min, max) {
+  _getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
 
