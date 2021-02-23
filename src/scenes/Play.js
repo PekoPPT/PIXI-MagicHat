@@ -17,11 +17,7 @@ export default class Play extends Scene {
     const hat = new MagicHat();
     hat.x = 0;
     hat.y = 400;
-    hat.interactive = true;
-    hat.buttonMode = true;
-    hat.addListener('click', () => hat.clicked());
     this.addChild(hat);
-
   }
 
   /**

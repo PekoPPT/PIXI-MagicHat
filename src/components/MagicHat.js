@@ -26,9 +26,13 @@ export default class MagicHat extends Container {
 
     await Assets.load({ images });
     await Assets.prepareImages(images).then(() => {
+
       // Initialization of the Hat sprite
       this._body = Sprite.from('hat');
       this._body.anchor.set(0.5, 1);
+      this._body.interactive = true;
+      this._body.buttonMode = true;
+      this._body.addListener('click', () => this.clicked());
       this.addChild(this._body);
 
       // Initialization of the Mask sprite
