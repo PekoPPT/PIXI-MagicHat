@@ -52,9 +52,8 @@ export default class MagicHat extends Container {
    * @memberof MagicHat
    */
   clicked() {
-    // Resets the position of the Text item
-    this._item.text = this._getRandomEmoji();
 
+    // Resets the position of the Text item
     gsap.to(this._item, {
       y: 0, duration: 0.001
     });
@@ -66,6 +65,8 @@ export default class MagicHat extends Container {
     gsap.to(this._item, {
       y: -600, ease: Elastic.easeOut.config(0.5, 0.3), duration: 1.5
     });
+
+    this._item.text = this._getRandomEmoji();
   }
 
   /**
