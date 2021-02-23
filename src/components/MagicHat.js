@@ -25,25 +25,25 @@ export default class MagicHat extends Container {
     };
 
     await Assets.load({ images });
-    await Assets.prepareImages(images);
+    await Assets.prepareImages(images).then(() => {
+      // Initialization of the Hat sprite
+      this._body = Sprite.from('hat');
+      this._body.anchor.set(0.5, 1);
+      this.addChild(this._body);
 
-    // Initialization of the Hat sprite
-    this._body = Sprite.from('hat');
-    this._body.anchor.set(0.5, 1);
-    this.addChild(this._body);
+      // Initialization of the Mask sprite
+      const mask = Sprite.from('mask');
+      mask.anchor.set(0.5);
+      mask.y = -495;
+      this.addChild(mask);
 
-    // Initialization of the Mask sprite
-    const mask = Sprite.from('mask');
-    mask.anchor.set(0.5);
-    mask.y = -495;
-    this.addChild(mask);
-
-    // Initialization of the Text field that will show the emojies
-    this._item = new Text('aaa', { fontFamily: 'Arial', fontSize: 180, fill: 0xff1010, align: 'center' });
-    this._item.x = -125;
-    this._item.y = -300;
-    this._item.mask = mask;
-    this.addChild(this._item);
+      // Initialization of the Text field that will show the emojies
+      this._item = new Text('aaa', { fontFamily: 'Arial', fontSize: 180, fill: 0xff1010, align: 'center' });
+      this._item.x = -125;
+      this._item.y = -300;
+      this._item.mask = mask;
+      this.addChild(this._item);
+    });
   }
 
   /**
