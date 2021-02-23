@@ -28,10 +28,9 @@ export default class MagicHat extends Container {
     await Assets.prepareImages(images);
 
     // Initialization of the Hat sprite
-    const hat = Sprite.from('hat');
-    this.hat = hat;
-    this.hat.anchor.set(0.5, 1);
-    this.addChild(this.hat);
+    this._body = Sprite.from('hat');
+    this._body.anchor.set(0.5, 1);
+    this.addChild(this._body);
 
     // Initialization of the Mask sprite
     const mask = Sprite.from('mask');
@@ -59,7 +58,7 @@ export default class MagicHat extends Container {
     });
 
     // Resets the scales the hat on X
-    gsap.to(this.hat, { pixi: { scaleY: 0.8, transformOrigin: 'top center' }, duration: 0.1, repeat: 1, yoyo: true });
+    gsap.to(this._body, { pixi: { scaleY: 0.8, transformOrigin: 'top center' }, duration: 0.1, repeat: 1, yoyo: true });
 
     // Conversts decimal number to Emoji
     this._item.text = String.fromCodePoint(this.getRandomInt(127789, 128567));
